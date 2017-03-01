@@ -20,7 +20,7 @@ For this project I used :
 
 
 
-## Code Example from Events Component
+## Code Example from Song Component
 
 ```javascript
 import React from 'react';
@@ -105,7 +105,7 @@ export default Song;
 
 ## Build Strategy
 
-My strategy was for my project to be a song playlist app, and to fully understand CRUD within rails. The Song component is a child of SongFeed and SongFeed renders in or is a child of App.js. Input component is also a child of App. The data from the input fields in Input is stored via values derived from ref on each field. This is then posted to a Firebase database (via a relevant url) using axios. The data posted is then fetched via axios and passed to the events object, which is stored/set in state within App (getEvents function within App component- Line 30). The edit and delete functions on each event are defined and called in the Songs component, and accessed/referenced via the unique key firebase  assigns each event. This is done by using the map function over the keys of the songs object in state within App. (Refer to Line 42 in App component within addEvent function).Additionally, an edit boolean is set in state within events. When false the event list will render as normal via regDisplay function  if edit is true, it will render the text area fields for all attributes of each event list item. (refer to lines 19,33,52,71 in Events). the edit boolean is changed within eventEdit function and is called on click of the Edit button.
+My strategy was for my project to be a song playlist app, and to fully understand CRUD within rails. The Song component is a child of SongFeed and SongFeed renders in or is a child of App.js. Input component is also a child of App. The data from the input fields in Input is stored via values derived from ref on each field. This is then posted to a Firebase database (via a relevant url) using axios. The data posted is then fetched via axios and passed to the songs object, which is stored/set in state within App (getSongs function within App component- Line 30). The edit and delete functions on each song are defined and called in the Songs component, and accessed/referenced via the unique key firebase  assigns each song. This is done by using the map function over the keys of the songs object in state within App. Additionally, an edit boolean is set in state within Song. When false the song list will render as normal via regDisplay function  if edit is true, it will render the text area fields for all attributes of each song. (refer to lines 19,33,52,71 in Song). The edit boolean is changed within songEdit function and is called on click of the Edit button.
 
 
 
@@ -116,7 +116,7 @@ The main contributor is GA and Hakuna Matata, who helped me come up with the log
 
 - It was tough syntaxing passing data to database tables in Rails and more importantly to deploy to heroku. I tried to change the query language to the database from sqlite to postgres to deploy to heroku which backfired, so for now I have used firebase. I will properly implement the data passed to tables and deploy to heroku.
 
-- I would like to additional song data from itunes and perhaps stats like no. of downloads, etc.
+- I would like to additional song data from iTunes and perhaps stats like no. of downloads, etc.
 
 - Be able to filter or search songs by keywords from the song name, artist, etc.
 
