@@ -1,9 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-// import './App.css';
 import Input from './Input';
-import Tweed from './Tweed';
-import TweedrFeed from './TweedrFeed';
-// import base from './base';
+import Song from './Song';
+import SongFeed from './SongFeed';
 import axios from 'axios';
 
 export default class HelloWorld extends React.Component {
@@ -18,34 +16,25 @@ export default class HelloWorld extends React.Component {
    constructor() {
     super();
     this.state = {
-      tweeds: {},
+      songs: {},
     }
 
     this.addEvent = this.addEvent.bind(this);
-    this.getTweeds=this.getTweeds.bind(this);
+    this.getSongs=this.getSongs.bind(this);
   }
   componentDidMount() {
-    this.getTweeds();
-      // this.getRequest();
-    // this.baseRef = base.syncState(
-    //   `messageBoard/messages`,
-    //   {
-    //     context: this,
-    //     state: 'messages',
-    //   }
-    // );
+    this.getSongs();
+
   }
 
-  getTweeds() {
+  getSongs() {
     const url = 'https://mustlistn.firebaseio.com/.json';
     //send `GET` request to the firebase db
     axios.get(url)
     .then((res) => {
       console.log(res.data);
-      this.setState({ tweeds: res.data })
+      this.setState({ songs: res.data })
 
-        // This line flips the order of the array, so the newest tweed is on top
-        // Then we set that flipped array to state
     })
 
     // .catch is a way for any errors in the db request to be thrown into
@@ -55,18 +44,18 @@ export default class HelloWorld extends React.Component {
     })
   }
 
-  addEvent() {
-    if(this.state.tweeds){
-      let feed=Object.keys(this.state.tweeds)
+  addSong() {
+    if(this.state.songs){
+      let feed=Object.keys(this.state.songs)
       .reverse()
       .map((key,i) => {
         return (
-          <Tweed
+          <Song
             key={key}
-            getTweeds={this.getTweeds}
-            addEvent={this.addEvent}
+            getSongs={this.getSongs}
+            addSong={this.addSong}
             toShow={key}
-            tweeds={this.state.tweeds} />
+            songs={this.state.songs} />
               )
       })
       return feed;
@@ -76,15 +65,15 @@ export default class HelloWorld extends React.Component {
 
 
   render() {
-    console.log(this.state.tweeds)
+    console.log(this.state.songs)
     return (
       <div className="App">
         <div className="App-header">
           <h2>MUSTLISTN</h2>
           <h5>Enter Awesome songs you think people should listen to!</h5>
           <Input
-            getTweeds={this.getTweeds}
-            addEvent={this.addEvent}
+            getSongs={this.getSongs}
+            addSong={this.addSong}
              />
         </div>
         <br/>
@@ -92,14 +81,12 @@ export default class HelloWorld extends React.Component {
         <div className="feed-list">
           <br/>
           <br/>
-        <TweedrFeed
-          id='tweedrfeed'
-          addEvent={this.addEvent}
+        <SongFeed
+          id='songfeed'
+          addSong={this.addSong}
           />
         </div>
       </div>
     );
   }
 }
-
-

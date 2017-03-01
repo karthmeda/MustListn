@@ -5,7 +5,7 @@ import axios from 'axios';
 
 class Input extends Component {
 
-  createMessage() {
+  createSong() {
     axios({
       method:'post',
       url: `https://mustlistn.firebaseio.com/.json`,
@@ -16,8 +16,8 @@ class Input extends Component {
       }
 
     }).then( () => {
-      this.props.getTweeds();
-      this.props.addEvent();
+      this.props.getSongs();
+      this.props.addSong();
       this.song.value= "";
       this.artist.value="";
     });
@@ -30,10 +30,10 @@ class Input extends Component {
   render() {
     return (
       <div>
-      <input type="text" ref={(input) => this.song = input} placeholder="Type a Cool Song" className="focus" /><br/><br/>
+      <input type="text" ref={(input) => this.song = input} placeholder="Type in a Cool Song" className="focus" /><br/><br/>
       <input type="text" ref={(input) => this.artist = input} id="title" placeholder="Enter the Artist Name" className="focus" />
       <br/>
-      <button type="submit" onClick={()=> this.createMessage()}  id="button">
+      <button type="submit" onClick={()=> this.createSong()}  id="button">
        Add a Song
       </button>
     </div>
